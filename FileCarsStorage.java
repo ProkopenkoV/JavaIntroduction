@@ -5,6 +5,8 @@ import homework_12_inter.CarStorage;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.StringJoiner;
 
 
@@ -24,7 +26,7 @@ public class FileCarsStorage implements CarStorage {
     }
 
     @Override
-    public Car[] readCars() {    //отсюда считываем инфу из файла
+    public List<Car> readCars() {    //отсюда считываем инфу из файла
 
         try(FileInputStream fis = new FileInputStream(inputFileName)) {
 
@@ -47,13 +49,13 @@ public class FileCarsStorage implements CarStorage {
         }
 
 
-        return new Car[0];
+        return Collections.emptyList();
 
     }
 
 
     @Override
-    public void writeCars(Car[] cars) {
+    public void writeCars(List<Car> cars) {
 
         try (FileOutputStream fos = new FileOutputStream(outputFileName)) {
             StringJoiner sj = new StringJoiner(";" + System.lineSeparator());

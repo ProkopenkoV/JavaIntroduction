@@ -2,12 +2,14 @@ package homework_12;
 
 
 import java.util.Arrays;
+import java.util.List;
 
 class TaxiPark implements TaxiPark_Interface {
-    public Car[] cars;
+    public List<Car> cars;
     public Car car;
 
-    TaxiPark(Car[] cars) {
+    TaxiPark(List<Car> cars) {
+
         this.cars = cars;
     }
 
@@ -16,8 +18,8 @@ class TaxiPark implements TaxiPark_Interface {
         System.out.print("1. Cost of all cars : $ ");
 
         int cost = 0;
-        for (int i = 0; i < cars.length; i++) {
-            Car car = cars[i];
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.get(i);
             cost += car.getPrice();
         }
 
@@ -27,26 +29,26 @@ class TaxiPark implements TaxiPark_Interface {
     }
 
     public void sortByFuelConsumption() {
-        for (int i = 0; i < cars.length; i++) {
-            for (int j = i + 1; j < cars.length; j++) {
-                if (cars[j].getFuelConsumption() > cars[i].getFuelConsumption()) {
-                    Car temp = cars[j];
-                    cars[j] = cars[i];
-                    cars[i] = temp;
+        for (int i = 0; i < cars.size(); i++) {
+            for (int j = i + 1; j < cars.size(); j++) {
+                if (cars.get(j).getFuelConsumption() > cars.get(i).getFuelConsumption()) {
+                    Car temp = cars.get(j);
+                    cars.set(j,cars.get(i) );
+                    cars.set(i,temp );
                 }
             }
         }
     }
 
-    public Car[] getCarsByMaxSpeed(int min, int max) throws NegativeSpeedException {
+    public List<Car> getCarsByMaxSpeed(int min, int max) throws NegativeSpeedException {
         System.out.print("\n2. ");
         if(min<0 || max<0){
             throw new NegativeSpeedException();
         }
-        Car[] temp = cars;
-        for (int i = 0; i < cars.length; i++) {
-            if (!(cars[i].getMaxSpeed() >= min && cars[i].getMaxSpeed() <= max)) {
-                temp = removingElementByIndex(temp, i);
+        List<Car> temp = cars;
+        for (int i = 0; i < cars.size(); i++) {
+            if (!(cars.get(i).getMaxSpeed() >= min && cars.get(i).getMaxSpeed() <= max)) {
+                temp.add(car);
 
             }
 
@@ -55,34 +57,6 @@ class TaxiPark implements TaxiPark_Interface {
     }
 
 
-
-    public Car[] arrayCopyAndPlusOneElement(Car[] car) {
-        Car[] temp = new Car[car.length+1];
-        for (int i = 0; i < car.length; i++)
-            car[i] = temp[i];
-        return temp;
-    }
-
-
-    @Override
-    public String toString() {
-        return "TaxiPark{" +
-                "cars=" + Arrays.toString(cars) +
-                ", car=" + car +
-                '}';
-    }
-
-    public Car[] removingElementByIndex(Car[] cars , int index){
-        Car[] newCars = new Car[cars.length-1];
-        for(int i = 0, j = 0; j < newCars.length; i++, j++){
-            if(index==i){
-                j--;
-            }else {
-                newCars[j]=cars[i];
-            }
-        }
-        return newCars;
-    }
 
 
 }

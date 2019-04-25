@@ -5,11 +5,12 @@ import homework_12_inter.FileCarsStorage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args){
         CarStorage storage = new FileCarsStorage("input.txt","out.txt");
-        Car[] cars = storage.readCars();
+        List<Car> cars = storage.readCars();
         storage.writeCars(cars);
 
 

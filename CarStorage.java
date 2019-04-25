@@ -6,10 +6,11 @@ import homework_12.Car;
 import java.io.FileNotFoundException;
 import java.*;
 import java.io.IOException;
+import java.util.List;
 
 public interface CarStorage {
 
-    Car[] readCars ();
-    void writeCars(Car[] cars);
+    List<Car> readCars ();
+    void writeCars(List<Car> cars);
 
 }
